@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body {
+            background-color:lightblue;
+        }
+        main {
+            height: 670px;
+            width: 700px;
+            background-color:paleturquoise;
+            position: absolute;
+            top: 150px;
+            left: 640px;
+            border-radius: 10px;
+            z-index: 0;
+        }
+        header{
+            top: 180px;
+            left: 930px;
+            position: absolute;
+            z-index: 1;
+        }
+        h1{
+            padding: 0px;
+            margin: 0px;
+        }
+        hr{
+            width: 480px;
+            position: absolute;
+            left: -180px;
+            color: white;
+        }
+        #name{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 100px;
+            left: 100px;
+        }
+        #email{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 200px;
+            left: 100px;
+        }
+        #age{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 300px;
+            left: 100px;
+        }
+        #pass{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 400px;
+            left: 100px;
+        }
+        #check{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 500px;
+            left: 100px;
+        }
+        form{
+            padding: 0px;
+            margin: 0px;
+            border: solid 2px white;
+            color: skyblue;
+            width: 300px;
+        }
+        input{
+            border-radius: 5px;
+            padding: 0px;
+            margin: 0px;
+            border: solid 2px white;
+            color: black;
+            width: 500px;
+            height: 30px;
+            font-weight: bold;
+            font-size: large;
+        }
+        h3{
+            margin: 0;
+        }
+        h4{
+            color: red;
+            margin: 0;
+            display: none;
+        }
+        #button1{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 595px;
+            left: 260px;
+            width: 200px;
+            height: 40px;
+            border-radius: 8px;
+            border: solid 2px darkgray;
+            color: white;
+            background-color: darkgrey;
+        }
+        #name_success{
+            color: green;
+            display: none;
+        }
+        #name_fail{
+            color: red;
+            display: none;
+        }
+        #email_success{
+            color: green;
+            display: none;
+        }
+        #email_fail{
+            color: red;
+            display: none;
+        }
+        #age_success{
+            color: green;
+            display: none;
+        }
+        .age_fail{
+            color: red;
+            display: none;
+        }
+
+        #pass_success{
+            color: green;
+            display: none;
+        }
+        #pass_fail1{
+            color: red;
+            display: none;
+        }
+        #pass_fail2{
+            color: red;
+            display: none;
+        }
+        #pass_fail3{
+            color: red;
+            display: none;
+        }
+
+        #check_success{
+            color: green;
+            display: none;
+        }
+        #check_fail{
+            color: red;
+            display: none;
+        }
+
+        .modal-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;    
+            justify-content: center;    
+        }
+
+        .modal {
+            background: white;
+            padding: 24px 16px;
+            border-radius: 4px;
+            width: 500px;
+            height: 150px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .modal p {
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            position: fixed;
+            top: 470px; 
+            left: 850px; 
+        }
+
+        .close-wrapper {
+            text-align: right;
+            height: 50%;
+            position: fixed;
+            top: 530px; 
+            left: 1170px; 
+        }
+
+    </style>
+    <head>
+        <title>회원가입</title>
+    </head>
+    <body>
+        <header>
+            <h1>회원가입</h1>
+            <hr style="border: solid 1px white">
+        </header>
+        <main>
+            <div id="name">
+                <h3>이름</h3>
+                    <input id="name_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="name_success">멋진 이름이네요!</div>
+                <div id="name_fail">필수 입력 항목입니다!</div>
+            </div>
+
+            <div id="email">
+                <h3>이메일</h3>
+                    <input id="email_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="email_success">올바른 이메일 형식입니다!</div>
+                <div id="email_fail">올바른 이메일 형식이 아닙니다!</div>
+            </div>
+
+            <div id="age">
+                <h3>나이</h3>
+                    <input id="age_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="age_success">올바른 나이 형식입니다!</div>
+                <div id="age_fail1" class="age_fail">나이는, 숫자를 입력받아야 합니다.</div>
+                <div id="age_fail2" class="age_fail">나이는, 음수가 될 수 없습니다.</div>
+                <div id="age_fail3" class="age_fail">나이는, 소수가 될 수 없습니다.</div>
+                <div id="age_fail4" class="age_fail">우리 영화 사이트는 19살 이상만 가입이 가능합니다.</div>
+            </div>
+
+            <div id="pass">
+                <h3>비밀번호</h3>
+                    <input id="pass_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="pass_success">올바른 비밀번호입니다!</div>
+                <div id="pass_fail1">비밀번호는 최소 4자리 이상이어야합니다.</div>
+                <div id="pass_fail2">비밀번호는 최대 12자리까지 가능합니다.</div>
+                <div id="pass_fail3">영어, 숫자, 특수문자를 모두 조합해서 비밀번호를 작성해야 합니다.</div>
+            </div>
+
+            <div id="check">
+                <h3>비밀번호 확인</h3>
+                    <input id="check_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="check_success">비밀번호가 일치합니다!</div>
+                <div id="check_fail">비밀번호가 일치하지 않습니다.</div>
+            </div>
+            
+            <button id="button1" disabled = "disabled">가입하기</button>
+        </main>
+        <div class="modal-wrapper">
+            <div class="modal">
+              <div class="modal-title">가입 성공!</div>
+              <p>UMC 챌린저 가입을 축하합니다!!</p>
+              <div class="close-wrapper">
+                <button id="button2">닫기</button>
+              </div>
+            </div>
+          </div>
+        <script>
+            {
+                let n = false;
+                let e = false;
+                let a = false;
+                let p = false;
+                let c = false;
+
+                const success_name = document.getElementById('name_success');
+                const fail_name = document.getElementById('name_fail');
+                const input_name = document.getElementById('name_input');
+
+                input_name.addEventListener('input',function(){
+                    if(input_name.value === ''){
+                        fail_name.style.display = 'block';
+                        success_name.style.display = 'none';
+                        n = false;
+                    } else{
+                        success_name.style.display = 'block';
+                        fail_name.style.display = 'none';
+                        n = true;
+                        join();
+                    }
+                });
+
+
+                const success_email = document.getElementById('email_success');
+                const fail_email = document.getElementById('email_fail');
+                const input_email = document.getElementById('email_input');
+                var email_valid_txt = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; 
+
+                input_email.addEventListener('input',function(){
+                    if(email_valid_txt.test(input_email.value)==false){
+                        fail_email.style.display = 'block';
+                        success_email.style.display = 'none';
+                        e = false;
+                    } else{
+                        success_email.style.display = 'block';
+                        fail_email.style.display = 'none';
+                        e = true;
+                        join();
+                    }
+                });
+
+
+                const success_age = document.getElementById('age_success');
+                const fail_age1 = document.getElementById('age_fail1');
+                const fail_age2 = document.getElementById('age_fail2');
+                const fail_age3 = document.getElementById('age_fail3');
+                const fail_age4 = document.getElementById('age_fail4');
+                const input_age = document.getElementById('age_input');
+                var age_valid_txt1 = /[0-9]/;
+                var age_valid_txt2 = /^-/;
+                var age_valid_txt3 = /(?=[.])/;
+
+                input_age.addEventListener('input',function(){
+                    if(age_valid_txt1.test(input_age.value)==false){
+                        fail_age1.style.display = 'block';
+                        fail_age2.style.display = 'none';
+                        fail_age3.style.display = 'none';
+                        fail_age4.style.display = 'none';
+                        success_age.style.display = 'none';
+                        a = false;
+                    } else if(age_valid_txt2.test(input_age.value)!=false){
+                        fail_age1.style.display = 'none';
+                        fail_age2.style.display = 'block';
+                        fail_age3.style.display = 'none';
+                        fail_age4.style.display = 'none';
+                        success_age.style.display = 'none';
+                        a = false;
+                    }
+                    else if(age_valid_txt3.test(input_age.value)!=false){
+                        fail_age1.style.display = 'none';
+                        fail_age2.style.display = 'none';
+                        fail_age3.style.display = 'block';
+                        fail_age4.style.display = 'none';
+                        success_age.style.display = 'none';
+                        a = false;
+                    }
+                    else if(input_age.value < 19){
+                        fail_age1.style.display = 'none';
+                        fail_age2.style.display = 'none';
+                        fail_age3.style.display = 'none';
+                        fail_age4.style.display = 'block';
+                        success_age.style.display = 'none';
+                        a = false;
+                    }
+                    else {
+                        fail_age1.style.display = 'none';
+                        fail_age2.style.display = 'none';
+                        fail_age3.style.display = 'none';
+                        fail_age4.style.display = 'none';
+                        success_age.style.display = 'block';
+                        a = true;
+                        join();
+                    }
+                });
+
+
+                const success_pass = document.getElementById('pass_success');
+                const fail_pass1 = document.getElementById('pass_fail1');
+                const fail_pass2 = document.getElementById('pass_fail2');
+                const fail_pass3 = document.getElementById('pass_fail3');
+                const input_pass = document.getElementById('pass_input');
+                var pass_valid_txt1 = /^[A-Za-z\d@$!%*#?&]{4,}/;
+                var pass_valid_txt2 = /^[A-Za-z\d@$!%*#?&]{1,12}/; 
+                var pass_valid_txt3 = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])/;  
+
+                input_pass.addEventListener('input',function(){
+                    if(pass_valid_txt1.test(input_pass.value)==false){
+                        fail_pass1.style.display = 'block';
+                        fail_pass2.style.display = 'none';
+                        fail_pass3.style.display = 'none';
+                        success_pass.style.display = 'none';
+                        p = false;
+                    } 
+                    else if(pass_valid_txt2.test(input_pass.value)==false){
+                        fail_pass1.style.display = 'none';
+                        fail_pass2.style.display = 'block';
+                        fail_pass3.style.display = 'none';
+                        success_pass.style.display = 'none';
+                        p = false;
+                    }
+                    else if(pass_valid_txt3.test(input_pass.value)==false){
+                        fail_pass1.style.display = 'none';
+                        fail_pass2.style.display = 'none';
+                        fail_pass3.style.display = 'block';
+                        success_pass.style.display = 'none';
+                        p = false;
+                    }
+                    else{
+                        fail_pass1.style.display = 'none';
+                        fail_pass2.style.display = 'none';
+                        fail_pass3.style.display = 'none';
+                        success_pass.style.display = 'block';
+                        p = true;
+                        join();
+                    }
+                });
+          
+                const success_check = document.getElementById('check_success');
+                const fail_check = document.getElementById('check_fail');
+                const input_check = document.getElementById('check_input');
+
+                input_check.addEventListener('input',function(){
+                    if(input_check.value === input_pass.value){
+                        fail_check.style.display = 'none';
+                        success_check.style.display = 'block';
+                        c = false;
+                    } else{
+                        success_check.style.display = 'none';
+                        fail_check.style.display = 'block';
+                        c = true;
+                        join();
+                    }
+                });
+
+                const open = document.getElementById("button1");
+                const close = document.getElementById("button2");
+                const modal = document.querySelector(".modal-wrapper");
+                open.onclick = () => {
+                    modal.style.display = "flex";
+                };
+                close.onclick = () => {
+                    modal.style.display = "none";
+                };
+
+                function join(){
+                    if (n && e && a && p && c){
+                        open.disabled = false;
+                    }
+                }
+
+            }
+        </script>
+    </body>
+</html>

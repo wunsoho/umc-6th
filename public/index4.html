@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        header{
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 50px;
+            font-size: large;
+        }
+        hr{
+            position: absolute;
+            align-items: center;    /* 수직 정렬 */
+            width: 1200px;
+            top: 180px;
+            left: 850px;
+        }
+        #toDo{
+            position: absolute;
+            top: 200px;
+            left: 950px;
+            width: 950px;
+            height: 60px;
+            border: solid 2px black;
+            font-size: larger;
+        }
+        #toDoList{
+            position: absolute;
+            top: 350px;
+            left: 1000px;
+            font-size: xx-large;
+            text-decoration: grey underline;
+        }
+        #toDoList button{
+            position: absolute;
+            left: 300px;
+            width: 70px;
+            height: 40px;
+            font-size: medium;
+            padding: 0%;
+            margin: 0%;
+        }
+        #do{
+            position: absolute;
+            left: 1050px;
+            top: 270px;
+            text-decoration: grey underline;
+        }
+        #did{
+            position: absolute;
+            left: 1700px;
+            top: 270px;
+            text-decoration: grey underline;
+        }
+    </style>
+    <head>
+        <title>UMC Study Plan</title>
+    </head>
+    <body>
+        <header>
+            <h1>UMC Study Plan</h1>
+        </header>
+        <div id="box">
+            <hr>
+            <input type="text" id="toDo" placeholder="스터디 계획을 작성해보세요!" onkeydown="keyCodeCheck()">
+        </div>
+        <div id="go">
+            <h1 id="do">해야 할 일</h1>
+            <h1 id="did">해낸 일</h1>
+        </div>
+        <div id="toDoList">
+    
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const toDo = document.querySelector('#toDo');
+                const toDoList = document.querySelector('#toDoList');
+                const didList = document.querySelector('#did');
+    
+                toDo.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // 기본 Enter 동작 제거
+                        addItem();
+                    }
+                });
+    
+                function moveItemToDidList(item) {
+                    const text = item.querySelector('span').textContent;
+                    const newItem = document.createElement('div');
+                    const newText = document.createElement('span');
+                    newText.textContent = text;
+                    const removeButton = document.createElement('button'); // 삭제
+                    removeButton.textContent = '삭제';
+                    removeButton.addEventListener('click', (event) => {
+                        event.currentTarget.parentNode.parentNode.removeChild(event.currentTarget.parentNode);
+                    });
+                    newItem.appendChild(newText);
+                    newItem.appendChild(removeButton);
+                    didList.appendChild(newItem);
+                    item.parentNode.removeChild(item);
+                }
+    
+                function addItem() {
+                    const item = document.createElement('div'); // div
+    
+                    const text = document.createElement('span'); // 내용
+                    text.textContent = toDo.value;
+    
+                    const completeButton = document.createElement('button'); // 완료 버튼
+                    completeButton.textContent = '완료';
+    
+                    completeButton.addEventListener('click', (event) => {
+                        moveItemToDidList(item);
+                    });
+    
+                    item.appendChild(text);
+                    item.appendChild(completeButton);
+    
+                    toDoList.appendChild(item);
+                    toDo.value = '';
+                }
+            });
+        </script>
+    </body>
+    
+    
+</html>
