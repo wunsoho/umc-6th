@@ -1,32 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import { movies } from "./movies";
-import App from './App.jsx'
-import './index.css'
+import Header from './components/Header.jsx';
+import MainPage from './components/MainPage.jsx';
+import Register from './components/Register.jsx';
+import Popular from './components/PopularPage.jsx';
+import NowPlaying from './components/NowPlayingPage.jsx';
+import TopRated from './components/TopRatedPage.jsx';
+import Upcoming from './components/Upcoming.jsx';
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
         <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <div className="app-container">
-                  {
-                    movies.results.map((item) => {
-                      return (
-                        <App
-                        poster_path={item.poster_path}
-                        title={item.title}
-                        vote_average={item.vote_average}  
-                        overview={item.overview}
-                        />
-                      )
-                    })
-                  }
-            </div>
-          }/>
-        </Routes> 
+        <div>
+          <Header/>
+          <Routes>
+            <Route path="/" element={<MainPage/>}/>
+            <Route path="register" element={<Register/>}/>
+            <Route path="/popular" element={<Popular/>}/>
+            <Route path="/nowplay" element={<NowPlaying/>}/>
+            <Route path="/toprated" element={<TopRated/>}/>
+            <Route path="/upcoming" element={<Upcoming/>}/>
+          </Routes> 
+        </div>
       </BrowserRouter>
-
   </React.StrictMode>,
 )

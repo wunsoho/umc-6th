@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const component = styled.div`
-    margin-left : 1vw;
+    margin-left : 2vw;
     margin-top : 2vh;
     background-color: #373b69;
     position: relative;
-    display:inline-block;   
+    display:inline-block;
 `;
 
 export const movie_img = styled.div`
@@ -24,7 +24,7 @@ export const movie_info = styled.div`
     color: #FFFFFF;
     display:flex;
     #average{
-        margin-left : 0.8vw;
+        margin-left : 1vw;
     }
 `;
 export const hide_info = styled.div`
