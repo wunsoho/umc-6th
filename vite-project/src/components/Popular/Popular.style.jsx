@@ -42,3 +42,38 @@ export const hide_info = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
 `;
+export const detailContainer = styled.div`
+    display: flex;
+`
+export const detail = styled.div`
+    font-size : 1em;
+    color : #ffffff;
+    margin-left : 5vw;
+    margin-top : 15vh;
+    .title1{
+        font-size : 1.5em;
+    }
+    .vote{
+        dispaly: inline-block;
+        margin-top : 3vh;
+    }
+    .date{
+        margin-top : 3vh;
+    }
+    .viewT{
+        margin-top : 3vh;
+    }
+    .viewD{
+        width : 50vw;
+        margin-top : 3vh;
+    }
+    .star_icon {
+        margin-left : 5px;
+        display: inline-flex;
+    }
+`
+export const detailimg = styled.div`
+    width : 250px;
+    margin-left : 15vw;
+    margin-top : 10vh;
+`

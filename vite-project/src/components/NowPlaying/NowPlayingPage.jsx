@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
-import * as A from './Popular.style.jsx';
+import * as A from '../Popular/Popular.style.jsx';
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {SyncLoader} from 'react-spinners';
 
@@ -8,19 +9,19 @@ function NowPlayingPage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const domain = "https://image.tmdb.org/t/p/w1280/";
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const navigate = useNavigate();
 
-  
-  const t = { display: "block" };
-  const f = { display: "none" };
-
-  const [tf, setTf] = useState(false);
-  const MouseOut = () => {
-    setTf(false);
-  };
-
-  const MouseIn = () => {
-    setTf(true);
-  };
+  const onClickImg = (movie) => {
+    navigate(`/nowplay/${movie.title}`,{
+      state: {
+        poster_path : movie.poster_path,
+        vote_average : movie.vote_average,
+        release_date : movie.release_date,
+        overview : movie.overview,
+      },
+    });
+  }
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -48,15 +49,15 @@ function NowPlayingPage() {
             </div>
             ) : (
           movies.map((movie, index) => ( 
-                    <A.component key={index} onMouseOver={MouseIn} onMouseOut={MouseOut}>
-                      <A.movie_img>
+                    <A.component key={index} onMouseOver={() => setHoveredIndex(index)} onMouseOut={() => setHoveredIndex(null)}>
+                      <A.movie_img onClick={() => onClickImg(movie)}>
                         <A.img src={domain + movie.poster_path} alt={movie.title} />
                         <A.movie_info>
                           <div>{movie.title}</div>
                           <div  id = "average">평점: {movie.vote_average}</div>
                         </A.movie_info>
                       </A.movie_img>
-                      <A.hide_info style={tf ? t : f}>
+                      <A.hide_info style={hoveredIndex === index ? { display : "block"} : { display : "none"}}>
                         <div>{movie.title}</div>
                         <div>{movie.overview}</div>
                       </A.hide_info>
