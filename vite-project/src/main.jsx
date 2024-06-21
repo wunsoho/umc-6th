@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from './components/Header.jsx';
 import MainPage from './components/MainPage.jsx';
-import Register from './components/Register.jsx';
 import Popular from './components/Popular/PopularPage.jsx';
 import PopularDetail from './components/Popular/PopularDetail.jsx';
 import NowPlaying from './components/NowPlaying/NowPlayingPage.jsx';
@@ -14,6 +13,7 @@ import Upcoming from './components/Upcoming/Upcoming.jsx';
 import UpcomingDetail from './components/Upcoming/UpcomingDetail.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
 import './index.css';
+import SignupPage from './components/SignupPage.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Header/>
           <Routes>
             <Route path="/" element={<MainPage/>}/>
-            <Route path="register" element={<Register/>}/>
+            <Route path="signup" element={<SignupPage/>}/>
             <Route path="popular" element={<Popular/>}/>
             <Route path="popular/:title" element={<PopularDetail/>}/>
             <Route path="nowplay" element={<NowPlaying/>}/>

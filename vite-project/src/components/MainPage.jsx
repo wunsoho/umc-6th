@@ -1,5 +1,7 @@
 import * as B from '../MainPage.style.jsx'
 import Slider from 'react-slick';
+import movieImg from '../movie1.png';
+
 
 function MainPage() {
   const settings1 = {
@@ -18,6 +20,13 @@ function MainPage() {
             </div>
           </Slider>
         </B.CustomSlider>
+        <B.Search>
+          <B.Title>
+            <img className="movieimg"src={movieImg} width='50px'></img>
+            <div className="title1">Find your movies !</div>
+          </B.Title>
+          <input></input>
+        </B.Search>
       </div>
   );
 }

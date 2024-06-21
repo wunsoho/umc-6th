@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Login from "./Login";
 
 function Header() {
     return (
@@ -15,15 +14,14 @@ function Header() {
             <Link to="/"
                 style={{
                     color: "#ffffff",
-                    marginRight: "50vw",
+                    marginRight: "57vw",
                     textDecoration : "none"
                 }}
                 className="header-link"
             >
                 UMC Movie
             </Link>
-            <Login/>
-            <Link to="/register"
+            <Link to="/signup"
                 style={{
                     color: "#ffffff",
                     marginRight: "2vw",
