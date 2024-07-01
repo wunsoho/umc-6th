@@ -77,3 +77,30 @@ export const detailimg = styled.div`
     margin-left : 15vw;
     margin-top : 10vh;
 `
+export const castContainer = styled.div`
+    margin-left : 5vw;
+    margin-top : 20vh;
+    width : 90vw;
+    text-align : center;
+    .castTitle{
+        font-weight : bold;
+        color : #ffffff;
+    }
+`
+
+export const castList = styled.div`
+    margin-top: 5vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #ffffff;
+`;
+
+export const castItem = styled.div`
+    margin: 2vw;
+    .profile { 
+        width: 5vw;
+        height: 5vw;
+        border-radius: 50%;
+    }
+`;

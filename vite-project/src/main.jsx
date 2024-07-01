@@ -14,14 +14,16 @@ import UpcomingDetail from './components/Upcoming/UpcomingDetail.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
 import './index.css';
 import SignupPage from './components/SignupPage.jsx';
-
+import SearchDetail from './components/SearchDetail.jsx';
+  
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <BrowserRouter>
         <div>
-          <Header/>
+          <Header/> 
           <Routes>
             <Route path="/" element={<MainPage/>}/>
+            <Route path="/movie/:id" element={<SearchDetail/>}/>
             <Route path="signup" element={<SignupPage/>}/>
             <Route path="popular" element={<Popular/>}/>
             <Route path="popular/:title" element={<PopularDetail/>}/>
