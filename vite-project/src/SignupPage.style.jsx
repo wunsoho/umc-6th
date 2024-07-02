@@ -4,6 +4,7 @@ export const title = styled.div`
     color : #ffffff;
     text-align : center;
     margin-top : 2vh;
+    margin-bottom : 5vh;
 `
 export const inputset = styled.div`
     margin-top : 3vh;

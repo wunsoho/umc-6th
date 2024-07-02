@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import * as A from '../Popular/Popular.style.jsx';
+import * as A from '../NowPlaying/NowPlaying.style';
 import axios from "axios";
 import {SyncLoader} from 'react-spinners';
 

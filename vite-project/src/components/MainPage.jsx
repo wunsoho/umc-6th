@@ -18,7 +18,9 @@ function MainPage() {
   const [title, setTitle] = useState('');
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingUser, setIsLoadingUser] = useState(true); 
   const debounceTimeoutRef = useRef(null);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const onClickImg = (movie) => {
@@ -32,6 +34,32 @@ function MainPage() {
       },
     });
   }
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem('Token');
+      console.log(token);
+      if (token) {
+        try {
+          const response = await axios.get('http://localhost:8080/auth/me', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          setUser(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        } finally {
+          setIsLoadingUser(false);
+        }
+      } else {
+        setIsLoadingUser(false); 
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +106,15 @@ function MainPage() {
       <B.CustomSlider>
         <Slider {...settings1}>
           <div className="slide-container">
-            <div className="slide_text">환영합니다</div>
+            {isLoadingUser ? (
+              <div className="slide_text">로딩 중...</div> 
+            ) : (
+              user ? (
+                <div className="slide_text">{user.name}님 환영합니다!</div>
+              ) : (
+                <div className="slide_text">환영합니다</div>
+              )
+            )}
           </div>
         </Slider>
       </B.CustomSlider>

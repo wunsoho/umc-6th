@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from './components/Header.jsx';
@@ -15,9 +14,9 @@ import NotFound from './components/NotFound/NotFound.jsx';
 import './index.css';
 import SignupPage from './components/SignupPage.jsx';
 import SearchDetail from './components/SearchDetail.jsx';
+import Login from './components/Login.jsx';
   
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
       <BrowserRouter>
         <div>
           <Header/> 
@@ -25,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/" element={<MainPage/>}/>
             <Route path="/movie/:id" element={<SearchDetail/>}/>
             <Route path="signup" element={<SignupPage/>}/>
+            <Route path="/login" element={<Login/>}/>
             <Route path="popular" element={<Popular/>}/>
             <Route path="popular/:title" element={<PopularDetail/>}/>
             <Route path="nowplay" element={<NowPlaying/>}/>
@@ -37,5 +37,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </Routes> 
         </div>
       </BrowserRouter>
-  </React.StrictMode>,
 )

@@ -1,14 +1,7 @@
 import styled from "styled-components";
 
-export const movieGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1vw;
-  padding: 2vh 15vw;
-`;
-
 export const component = styled.div`
-    width : 200px;
+    margin-left : 2vw;
     margin-top : 2vh;
     background-color: #373b69;
     position: relative;

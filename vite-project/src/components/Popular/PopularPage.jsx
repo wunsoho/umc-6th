@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import * as A from './Popular.style.jsx';
 import axios from "axios";
 import {SyncLoader} from 'react-spinners';
+import Pagination from '../Pagination.jsx';
 
 function PopularPage() {
 
@@ -10,6 +11,8 @@ function PopularPage() {
   const [loading, setLoading] = useState(true);
   const domain = "https://image.tmdb.org/t/p/w1280/";
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const[currentPage, setCurrentPage] = useState(1);
+  const[totalPages, setTotalPages] = useState(10);
   const navigate = useNavigate();
 
   const onClickImg = (movie) => {
@@ -22,10 +25,9 @@ function PopularPage() {
       },
     });
   }
-  useEffect(() => {
-      const fetchData = async () => {
+      const fetchData = async (page) => {
           try {
-              const response = await axios.get("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1", {
+              const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`, {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
@@ -33,14 +35,23 @@ function PopularPage() {
                 },
               });
               setMovies(response.data.results);
+              setTotalPages(response.data.total_pages);
               setLoading(false);
           } catch (error) {
               console.error("Error fetching data:", error);
           }
       };
+      useEffect(() => {
+        fetchData(currentPage);
+    }, [currentPage]);
 
-      fetchData();
-  }, []);
+      const handlePageChange = (page) => {
+          if (page < 1 || page > totalPages) {
+            alert('가장 첫 번째 페이지입니다.')
+            return;
+          }
+          setCurrentPage(page);
+      };
     return (
       <div>
       {loading ? ( 
@@ -48,22 +59,29 @@ function PopularPage() {
               <SyncLoader color="#ffffff" loading={loading} size={30} />
           </div>
           ) : (
-        movies.map((movie, index) => ( 
-                  <A.component key={index} onMouseOver={() => setHoveredIndex(index)} onMouseOut={() => setHoveredIndex(null)}>
-                    <A.movie_img onClick={() => onClickImg(movie)}>
-                      <A.img src={domain + movie.poster_path} alt={movie.title}/>
-                      <A.movie_info>
+          <A.movieGrid>
+          {movies.map((movie, index) => ( 
+                    <A.component key={index} onMouseOver={() => setHoveredIndex(index)} onMouseOut={() => setHoveredIndex(null)}>
+                      <A.movie_img onClick={() => onClickImg(movie)}>
+                        <A.img src={domain + movie.poster_path} alt={movie.title}/>
+                        <A.movie_info>
+                          <div>{movie.title}</div>
+                          <div  id = "average">평점: {movie.vote_average}</div>
+                        </A.movie_info>
+                      </A.movie_img>
+                      <A.hide_info style={hoveredIndex === index ? { display : "block"} : { display : "none"}}>
                         <div>{movie.title}</div>
-                        <div  id = "average">평점: {movie.vote_average}</div>
-                      </A.movie_info>
-                    </A.movie_img>
-                    <A.hide_info style={hoveredIndex === index ? { display : "block"} : { display : "none"}}>
-                      <div>{movie.title}</div>
-                      <div>{movie.overview}</div>
-                    </A.hide_info>
-                  </A.component>
-        ))
+                        <div>{movie.overview}</div>
+                      </A.hide_info>
+                    </A.component>
+          ))}
+          </A.movieGrid>
       )}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={10}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

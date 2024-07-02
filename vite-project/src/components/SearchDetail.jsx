@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axios from 'axios';
-import * as A from './Popular/Popular.style.jsx';
+import * as A from '../components/NowPlaying/NowPlaying.style.jsx';
 
 function SearchDetail() {
     const location = useLocation();

@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
+    const isLoggedIn = localStorage.getItem('Token') !== null;
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('Token');
+        navigate('/'); 
+    };
+
     return (
         <div
             style={{
@@ -14,23 +22,51 @@ function Header() {
             <Link to="/"
                 style={{
                     color: "#ffffff",
-                    marginRight: "57vw",
+                    marginRight: "50vw",
                     textDecoration : "none"
                 }}
                 className="header-link"
             >
                 UMC Movie
             </Link>
-            <Link to="/signup"
-                style={{
-                    color: "#ffffff",
-                    marginRight: "2vw",
-                    textDecoration : "none"
-                }}
-                className="header-link"
-            >
-                회원가입
-            </Link>
+            {isLoggedIn ? (
+                <Link 
+                    to="/"
+                    onClick={handleLogout}
+                    style={{
+                        color: "#ffffff",
+                        marginRight: "2vw",
+                        textDecoration: "none",
+                        cursor: "pointer"
+                    }}
+                    className="header-link"
+                 >
+                로그아웃
+                </Link>
+            ) : (
+                <>
+                    <Link to="/login"
+                        style={{
+                            color:"#ffffff",
+                            marginRight:"2vw",
+                            textDecoration : "none",
+                        }}
+                        className="header-link"
+                    >
+                        로그인
+                    </Link>
+                    <Link to="/signup"
+                        style={{
+                            color: "#ffffff",
+                            marginRight: "2vw",
+                            textDecoration : "none"
+                        }}
+                        className="header-link"
+                    >
+                        회원가입
+                    </Link>
+                </>
+            )}
             <Link to="/popular"
                 style={{
                     color: "#ffffff",
